@@ -1,5 +1,8 @@
 from seperate_assets import *
 
+
+# contain objects, each obj represent a particular asset
+assets = []
 # total no. of top buy/sell orders to display in order book
 TOP_BIDSASKS_NO = 9
 # OrderID of placed orders by user
@@ -8,6 +11,8 @@ Orders = 0
 MKT_Orders = []
 # all types of orders placed by user
 placedOrders = []
+# default symbol to display
+symbol = None
 
 # attributes:                        OrderNo, Symbol, Qty, Rate, Remaining Qty, Type, Sucess_on_placing
 # attribute col-index (placedOrders):      0,      1,   2,    3,             4,    5,                 6
@@ -116,12 +121,6 @@ class AssetData():
         self.createQueue()
 
 
-# contain objects, each obj represent a particular asset
-assets = []
 for i, sec in enumerate(allSymbols):
     assets.append(AssetData(sec))
-    if i == 16:
-        break
-
-# default symbol to display
-symbol = assets[1].arr[0][9]
+symbol = assets[len(assets)-1].arr[0][9]
