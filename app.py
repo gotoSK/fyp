@@ -304,7 +304,7 @@ def orderMatch_sim(obj):
                             for indx in range(9, 16):
                                 if y[1][indx] != '0':
                                     placedOrders[int(y[1][indx:])-1][4] = 0
-                                    socketio.emit('placed_orders', {'placedOrders': placedOrders})
+                                    # socketio.emit('placed_orders', {'placedOrders': placedOrders})
 
                         linear_price()
 
@@ -319,9 +319,10 @@ def orderMatch_sim(obj):
 
 
     if arr[0][9] == symbol:
-            time.sleep(1.000001) # wait at least more than 1 sec for app to fully run
+            time.sleep(1.000001) # wait at lseast more than 1 sec for app to fully run
             socketio.emit('display_asset', {'prevClose': prevClose, 'sym': symbol, 'scripName': name})
 
+    sym = arr[0][9]
     while len(arr) != 0:
         genOB(arr[0][5])
         matchOrder()
@@ -333,26 +334,29 @@ def orderMatch_sim(obj):
 
             event_start_subThread.clear()
             event_place_LMT.clear()
+    print(sym)
+
 
 # def LMT_place(Rate, Qty, OrderNo, type):
 #     global skip
 #     OrderData = []
+#     key = None # respective stock's index in object list
     
 #     def genTime(idx):
 #         if idx-1 < 0:
-#             return arr[idx][6] + timedelta(microseconds=-1)
-#         if idx+1 == len(arr):
-#             return arr[idx][6] + timedelta(microseconds=1)
+#             return assets[key].arr[idx][6] + timedelta(microseconds=-1)
+#         if idx+1 == len(assets[key].arr):
+#             return assets[key].arr[idx][6] + timedelta(microseconds=1)
 #         else:
-#             return arr[idx-1][6] + (arr[idx][6] - arr[idx-1][6]) / 2
+#             return assets[key].arr[idx-1][6] + (assets[key].arr[idx][6] - assets[key].arr[idx-1][6]) / 2
 
 #     def write_orderData():
 #         nonlocal OrderData
-#         rand = random.choice(arr)
+#         rand = random.choice(assets[key].arr)
 #         if type == 'Buy':
-#             OrderData = ['', genConID(False), 100, rand[3], Qty, Rate, genTime(idx), 'Orchid International', rand[8], arr[0][9]]
+#             OrderData = ['', genConID(False), 100, rand[3], Qty, Rate, genTime(idx), 'Orchid International', rand[8], assets[key].arr[0][9]]
 #         else:
-#             OrderData = ['', genConID(False), rand[2], 100, Qty, Rate, genTime(idx), rand[7], 'Orchid International', arr[0][9]]
+#             OrderData = ['', genConID(False), rand[2], 100, Qty, Rate, genTime(idx), rand[7], 'Orchid International', assets[key].arr[0][9]]
 
 #     def in_the_end():
 #         global subThreads, skip, placedOrders
@@ -365,45 +369,52 @@ def orderMatch_sim(obj):
 #         else:
 #             skip = True
 
+
+#     # find that stock's data structure
+#     for idx, asset in enumerate(assets):
+#         if symbol == asset.arr[0][9]:
+#             key = idx
+#             break
+
 #     with lock_orderPlacing: # following threads (placed orders) wait before the first thread is completely placed in data structures
 #         if skip == False:
 #             event_start_subThread.wait() # wait for main-thread to check if orders have matched before overwriting the new order to the data structure
         
 #         compare = (lambda x, y: x < y) if type == 'Buy' else (lambda x, y: x > y)
-#         for idx, next in enumerate(arr):
+#         for idx, next in enumerate(assets[key].arr):
 #             if compare(next[5], Rate):
 #                 write_orderData()
-#                 arr.insert(idx, OrderData)
+#                 assets[key].arr.insert(idx, OrderData)
 #                 encounter = False
-#                 for i, price in enumerate(prices):
+#                 for i, price in enumerate(assets[idx].prices):
 #                     if price == Rate:
-#                         queue[i].insert(0, OrderData)
+#                         assets[idx].queue[i].insert(0, OrderData)
 #                         encounter = True
 #                         break
 #                     elif price > Rate:
-#                         prices.insert(i, Rate)
-#                         queue.insert(i, [OrderData])
+#                         assets[idx].prices.insert(i, Rate)
+#                         assets[idx].queue.insert(i, [OrderData])
 #                         encounter = True
 #                         break
 #                 if encounter == False:
-#                     prices.append(Rate)
-#                     queue.append([OrderData])
+#                     assets[idx].prices.append(Rate)
+#                     assets[idx].queue.append([OrderData])
 #                 in_the_end()
 #                 return
 
 #             elif next[5] == Rate:
 #                 count = 0
 #                 while True:
-#                     if arr[idx+1][5] == Rate:
+#                     if assets[key].arr[idx+1][5] == Rate:
 #                         idx += 1
 #                         count += 1
 #                     else:
 #                         write_orderData()
-#                         arr.insert(idx+1, OrderData)
-#                         for i, price in enumerate(prices):
+#                         assets[key].arr.insert(idx+1, OrderData)
+#                         for i, price in enumerate(assets[idx].prices):
 #                             if price == Rate:
 #                                 write_orderData()
-#                                 queue[i].insert(count+1, OrderData)
+#                                 assets[idx].queue[i].insert(count+1, OrderData)
 #                                 break
 #                         break
 #                 in_the_end()
@@ -411,23 +422,23 @@ def orderMatch_sim(obj):
 
 #         if type == 'Buy':
 #             write_orderData()
-#             arr.append(OrderData)
-#             prices.insert(0, Rate)
-#             queue.insert(0, [OrderData])
+#             assets[key].arr.append(OrderData)
+#             assets[idx].prices.insert(0, Rate)
+#             assets[idx].queue.insert(0, [OrderData])
 #         else:
 #             write_orderData()
-#             arr.append(OrderData)
-#             prices.append(Rate)
-#             queue.append([OrderData])
+#             assets[key].arr.append(OrderData)
+#             assets[idx].prices.append(Rate)
+#             assets[idx].queue.append([OrderData])
 #         in_the_end()
 
 
-# Home page
+# # Home page
 @app.route("/")
 def index():
     return render_template("index.html")
 
-# Handle the form submission (AJAX)
+# # Handle the form submission (AJAX)
 # @app.route('/place_order', methods=['POST'])
 # def place_order():
 #     try:
@@ -439,10 +450,10 @@ def index():
 #         Orders += 1
 
 #         if Rate == 0: # market execution
-#             placedOrders.append([Orders, arr[0][9], Qty, 'MKT', Qty, action, False])
+#             placedOrders.append([Orders, symbol, Qty, 'MKT', Qty, action, False])
 #             MKT_Orders.append(Orders)
 #         else: # normal limit order
-#             placedOrders.append([Orders, arr[0][9], Qty, Rate, Qty, action, False])
+#             placedOrders.append([Orders, symbol, Qty, Rate, Qty, action, False])
 #             subThreads += 1
 #             threading.Thread(target=LMT_place, args=(Rate, Qty, Orders, action)).start() # run process in background
 #         socketio.emit('placed_orders', {'placedOrders': placedOrders})
@@ -457,7 +468,8 @@ def index():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+
     for obj in assets:
         threading.Thread(target=orderMatch_sim, args=(obj,)).start()
-        if obj == assets[i]: # to run the app once and for all
+        if obj.arr[0][9] == symbol:
             socketio.run(app, debug=True)
