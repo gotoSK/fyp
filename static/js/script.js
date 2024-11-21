@@ -37,10 +37,24 @@ document.addEventListener('DOMContentLoaded', function() {
         col.textContent = scripName;
         stockInfo.appendChild(col);
 
-        // Insert price (LTP)
-        col = document.createElement('div');
-        col.textContent = lastLTP;
-        stockInfo.appendChild(col);
+        // Insert price (LTP) & %change
+        if (lastLTP != null) {
+            col = document.createElement('div');
+            col.textContent = lastLTP;
+            stockInfo.appendChild(col);
+
+            if (prevClose != null) {
+                col = document.createElement('div');
+                change = ((lastLTP - prevClose) / prevClose) * 100;
+                if (change > 0) {
+                    col.textContent = '+' + change.toFixed(2) + '%';
+                }
+                else {
+                    col.textContent = change.toFixed(2) + '%';
+                }
+                stockInfo.appendChild(col);
+            }
+        }
 
         // Insert Prev. Day's Closing Price
         col = document.createElement('div');
