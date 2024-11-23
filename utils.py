@@ -13,6 +13,8 @@ MKT_Orders = []
 placedOrders = []
 # default symbol to display
 symbol = None
+# datecode in conID
+datecode = None
 
 # attributes:                        OrderNo, Symbol, Qty, Rate, Remaining Qty, Type, Sucess_on_placing
 # attribute col-index (placedOrders):      0,      1,   2,    3,             4,    5,                 6
@@ -123,4 +125,6 @@ class AssetData():
 
 for i, sec in enumerate(allSymbols):
     assets.append(AssetData(sec))
+
+datecode = assets[0].arr[0][1]
 symbol = assets[len(assets)-1].arr[0][9]
