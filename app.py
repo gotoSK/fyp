@@ -52,15 +52,16 @@ event_start_subThread = threading.Event() # while waiting for main thread to be 
 event_place_LMT = threading.Event() # while LMT order is being placed
 lock_orderPlacing = threading.Lock()
 lock_db = threading.Lock()
+lock_emit = threading.Lock()
 skip = False
 
-# def genConID(rem_mkt_order):
-#     global placedOrders
+def genConID(rem_mkt_order):
+    global placedOrders
 
-#     if rem_mkt_order == True:
-#         placedOrders.append([None])
+    if rem_mkt_order == True:
+        placedOrders.append([None])
     
-#     return arr[0][1][:8] + '1' + '0' * (7 - len(str(Orders))) + str(Orders)
+    return datecode + '1' + '0' * (7 - len(str(Orders))) + str(Orders)
 
 # def MKT_execute():
 #     global placedOrders
@@ -162,8 +163,8 @@ def orderMatch_sim(obj):
     def genOB(rate):
         # top bid & ask prices in order book
         bidPrices = []; askPrices = []
-        bidPrices = genPrices(rate, 'bids', prices, prevClose)
-        askPrices = genPrices(rate, 'asks', prices, prevClose)
+        bidPrices = genPrices(rate, 'bids', prices)
+        askPrices = genPrices(rate, 'asks', prices)
 
         # generating asks order book
         for i in range(0, TOP_BIDSASKS_NO): # filling each row in order book
@@ -222,12 +223,11 @@ def orderMatch_sim(obj):
                 buyOB[i][0] = len(obj.remove_duplicates(brokers))
 
         
-        if mkt_ex_mode == False:
-            if arr[0][9] == symbol:
-                socketio.emit('order_book', {'sellOB': sellOB, 'buyOB': buyOB, 'ltp': arr[0][5]})
-        else:
-            if arr[0][9] == symbol:
-                socketio.emit('order_book', {'sellOB': sellOB, 'buyOB': buyOB})
+        with lock_emit:
+            if mkt_ex_mode == False:
+                socketio.emit('order_book', {'sellOB': sellOB, 'buyOB': buyOB, 'ltp': arr[0][5], 'sym': arr[0][9]})
+            else:
+                socketio.emit('order_book', {'sellOB': sellOB, 'buyOB': buyOB, 'sym': arr[0][9]})
 
     def linear_price():
         if len(arr) > 1:
@@ -287,7 +287,7 @@ def orderMatch_sim(obj):
                         with lock_db:
                             with app.app_context():
                                 try:
-                                    new_row = PriceRow(conID=x[0][1], buyerID=x[0][2], sellerID=x[0][3], qty=x[0][4], rate=x[0][5], buyerName=x[0][7], sellerName=x[0][8], symbol=x[0][9])
+                                    new_row = PriceRow(conID=y[1], buyerID=y[2], sellerID=y[3], qty=y[4], rate=y[5], buyerName=y[7], sellerName=y[8], symbol=y[9])
                                     db.session.add(new_row)
                                     db.session.commit()
                                 except IntegrityError:
@@ -317,10 +317,12 @@ def orderMatch_sim(obj):
                     else:
                         break
 
+    
+    time.sleep(1.000001) # wait at lseast more than 1 sec for app to fully run
+    socketio.emit('stock_list', {'ltp': arr[0][5], 'sym': arr[0][9], 'scripName': name, 'prevClose': prevClose})
 
-    if arr[0][9] == symbol:
-            time.sleep(1.000001) # wait at lseast more than 1 sec for app to fully run
-            socketio.emit('display_asset', {'prevClose': prevClose, 'sym': symbol, 'scripName': name})
+    if arr[0][9] == symbol: # for default asset to display
+            socketio.emit('display_asset', {'sym': symbol})
 
     sym = arr[0][9]
     while len(arr) != 0:
@@ -438,7 +440,15 @@ def orderMatch_sim(obj):
 def index():
     return render_template("index.html")
 
-# # Handle the form submission (AJAX)
+@socketio.on('scrip_selected')
+def handle_scrip_selected(data):
+    global symbol
+
+    scrip = data.get('scrip')
+    
+    symbol = scrip
+
+# Handle the form submission (AJAX)
 # @app.route('/place_order', methods=['POST'])
 # def place_order():
 #     try:
@@ -452,7 +462,7 @@ def index():
 #         if Rate == 0: # market execution
 #             placedOrders.append([Orders, symbol, Qty, 'MKT', Qty, action, False])
 #             MKT_Orders.append(Orders)
-#         else: # normal limit order
+#         else: # limit order
 #             placedOrders.append([Orders, symbol, Qty, Rate, Qty, action, False])
 #             subThreads += 1
 #             threading.Thread(target=LMT_place, args=(Rate, Qty, Orders, action)).start() # run process in background
