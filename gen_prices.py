@@ -5,7 +5,7 @@ from utils import *
 #     upper_bound = prevClose * 1.1
 #     return lower_bound <= x <= upper_bound
 
-def genPrices(x, type, prices, prevClose):
+def genPrices(x, type, prices):
     temp = [] # to store bid/ask prices within this funtion temporarily before passing to actual list
     count = 0
     if type == 'bids':
