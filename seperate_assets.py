@@ -8,6 +8,7 @@ prevDay = [] # previous day data of all securities
 
 
 with open('./data/2024-08-01', 'r') as csv_file:
+    print("Extracting data ...")
     csv_reader = csv.reader(csv_file)
     next(csv_reader)
 
@@ -39,6 +40,7 @@ with open('./data/2024-08-01', 'r') as csv_file:
 
 # select the only assets to work on
 def refine():
+    print("Selecting Stocks ...")
     global allSymbols
     temp = []
     for sec in allSymbols:
@@ -51,6 +53,7 @@ refine()
 
 # extracting previous day data
 with open('./data/2024-07-31', 'r') as csv_file:
+    print("Extracting previous day's data ...")
     csv_reader = csv.reader(csv_file)
     next(csv_reader)
     # attributes:                      stockId, Symbol, securityName, Rate
@@ -68,6 +71,7 @@ with open('./data/2024-07-31', 'r') as csv_file:
 
 # Write data as a CSV file
 with open('./data/all-securities.csv', 'w', newline="") as file:
+    print("Writing file ...")
     writer = csv.writer(file)
     writer.writerow(["S.N.", "Symbol", "TotalTransactions", "MaxGain/Drawdown"])
     totalTran = 0
