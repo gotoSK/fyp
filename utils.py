@@ -1,4 +1,6 @@
-from seperate_assets import *
+from seperate_assets import allSymbols, prevDay
+
+import threading
 
 
 # contain objects, each obj represent a particular asset
@@ -15,13 +17,17 @@ placedOrders = []
 symbol = None
 # datecode in conID
 datecode = None
+# specific locks for each object
+lock_orderPlacing = []
+
 
 # attributes:                        OrderNo, Symbol, Qty, Rate, Remaining Qty, Type, Sucess_on_placing
 # attribute col-index (placedOrders):      0,      1,   2,    3,             4,    5,                 6
 
+
 class AssetData():
     def __init__(self, arr) -> None:
-        # custom floorsheet
+        # extracted data (orders) of this asset, used to simulate supply-demand
         self.arr = arr[::-1]
         # list to store unique prices in sorted manner
         self.prices = [el[5] for el in self.arr]
@@ -35,6 +41,12 @@ class AssetData():
         self.buyOB = []; self.sellOB = []
         # total no. of sub-threads in existance
         self.subThreads = 0 
+        # while waiting for main thread to be halted
+        self.event_start_subThread = threading.Event()
+        # while LMT order is being placed
+        self.event_place_LMT = threading.Event()
+        # when main-thread is not waiting
+        self.skip = False
         # market execution mode
         self.mkt_ex_mode = False
 
@@ -123,8 +135,10 @@ class AssetData():
         self.createQueue()
 
 
+print("Creating Objects ...")
 for i, sec in enumerate(allSymbols):
     assets.append(AssetData(sec))
-
-datecode = assets[0].arr[0][1]
+    lock_orderPlacing.append(threading.Lock())
+    
+datecode = assets[0].arr[0][1][:8]
 symbol = assets[len(assets)-1].arr[0][9]
