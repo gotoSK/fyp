@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const scrip = row[1];
             const ltp = row[0];
             const pC = row[3];
-            const percentChange = (((ltp - pC) / pC) * 100).toFixed(2);
+            change = (((ltp - pC) / pC) * 100);
+            const percentChange = change > 0 ? '+' + change.toFixed(2) : change.toFixed(2);
     
             // Create a new row
             const rowElement = document.createElement('div');
@@ -82,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 sessionStorage.setItem('lastSellOB', JSON.stringify(lastSellOB));
                 sessionStorage.setItem('lastBuyOB', JSON.stringify(lastBuyOB));
                 document.getElementById('order-book-table-body').innerHTML = '';
-    
+                
+                updateChart(symbol);
                 load_Floorsheet();
             });
     
@@ -391,8 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.setItem('dataMat', JSON.stringify(dataMat));
             sessionStorage.setItem('labels', JSON.stringify(labels));
         }
-        
-        priceChart.update();
+        if (sym == symbol)  priceChart.update();
     }
 
     function load_placedOrders() {
@@ -515,10 +516,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
+            for (let x of dataMat) {
+                if (x[1] == symbol) {
+                    prevClose = x[3];
+                    break;
+                }
+            }
             let p1 = (prevClose*0.9).toString();
             let decimalIndex = p1.indexOf('.');
             if (decimalIndex !== -1 && p1.length - decimalIndex - 1 === 2) {
-                p1 = parseFloat(p1.slice(0, -1)) + 0.1;
+                p1 = parseFloat(p1.slice(0, -1)) + 0.1;prevClose
             } else {
                 p1 = parseFloat(p1.slice(0, -1));
             }
@@ -589,6 +596,17 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#open-orders-btn').removeClass('active');
         $('#filled-orders').show();
         $('#open-orders').hide();
+    });
+    
+    socket.on('finished_matching', function(data) {
+        for (let i in dataMat) {
+            if (dataMat[i][1] == data.sym) {
+                dataMat.splice(i, 1);
+                sessionStorage.setItem('dataMat', JSON.stringify(dataMat));
+                break;
+            }
+        }
+        load_exploreTab();
     });
 
     // ensure the chart values are saved before the page is unloaded (for data integrity &/or backup for unexpected interruptions)
