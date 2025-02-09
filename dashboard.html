@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dashboard</title>
+    <script>
+        function fetchUsers() {
+            fetch("http://127.0.0.1:5000/api/users")
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById("user-table-body");
+                    tableBody.innerHTML = ""; // Clear old data
+
+                    data.forEach(user => {
+                        const row = `<tr>
+                                        <td>${user.id}</td>
+                                        <td>${user.username}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.phone_number || 'N/A'}</td>
+                                        <td>NPR ${user.collateral.toFixed(2)}</td>
+                                    </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error("Error fetching users:", error));
+        }
+
+        // Call the function when the page loads
+        window.onload = fetchUsers;
+    </script>
+
+</head>
+
+<body>
+    <div id="main">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Collateral</th>
+                </tr>
+            </thead>
+            <tbody id="user-table-body">
+                <!-- Data will be inserted dynamically -->
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
