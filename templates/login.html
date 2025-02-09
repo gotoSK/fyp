@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/icons/bootstrap-icons.css">
+        <link rel="stylesheet" href="/static/CSS/main.css">
+    </head>
+    <body>
+        <div class="app-body">
+            <div class="container d-flex justify-content-center align-items-center mt-5">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>
+                                <i class="bi bi-upc-scan mx-2"></i>
+                                Login to Order Match
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" action="{{ url_for('routes.login_route') }}">
+                                <div class="form-group">
+                                    <label for="username">
+                                        <i class="bi bi-input-cursor-text mx-2"></i>
+                                        Username
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="username"
+                                        name="username"
+                                        required
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">
+                                        <i class="bi bi-lock mx-2"></i>
+                                        Password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        id="password"
+                                        name="password"
+                                        required
+                                    >
+                                </div>
+                                <a href="#">Forgot Password?</a>
+                                <button type="submit" class="btn mt-2 btn-primary form-control">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-footer d-flex justify-content-center ">
+            <span>© Order Matching 2025 | २०८१</span>
+        </div>
+    </body>
+</html>

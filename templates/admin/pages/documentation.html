@@ -1,0 +1,1169 @@
+<div class="card p-4">
+    <div class="card-header">
+        <h3>
+            <i class="bi bi-journal-bookmark-fill mx-2"></i>
+            Documentation
+        </h3>
+    </div>
+    <div class="card-body justify text-justify p-4">
+        <div class="container fs-5">
+            <h1>Chapter 1: Introduction</h1>
+            <h2> 1.1 Introduction</h2>
+            <p>
+                “Order Matching and & Clearing Obligations” is a critical process in financial markets that ensures efficient trade execution and settlement between parties involved in buying and selling financial assets. Order matching refers to the algorithmic process of pairing buy and sell orders in a market, typically based on price and time priority, to facilitate trade execution. The most common matching algorithm is the Price/Time algorithm, where orders are matched first by price, and then by the order submission time if multiple orders share the same price.
+            </p>
+            <p>
+                Once trades are matched, Netting Settlement comes into play. It is the process of calculating and consolidating the obligations between market participants, where instead of settling each transaction individually, netting reduces the number of transactions by offsetting buy and sell obligations. This reduces transaction costs and enhances efficiency in the settlement process. Typically, netting algorithms (e.g., Tarjan’s method) are used to calculate the net obligations, ensuring the settlement is done with minimal transaction volumes, which reduces risk and speeds up the settlement process.
+            </p>
+            <h2>1.2 Problem Statement</h2>
+            <p>
+                Traditional trading platforms require robust mechanisms to match buy and sell orders while ensuring real-time execution. Efficient order matching is critical for market integrity, and clearing obligations must be settled promptly to reduce counter-party risks. The challenge is to implement a system that can:
+            </p>
+            <ul>
+                <li>Accurately match buy and sell orders based on price-time priority.</li>
+                <li>Maintain a transparent and dynamic order book.</li>
+                <li>Handle multiple trading instruments efficiently.</li>
+                <li>Execute transactions with minimal latency.</li>
+                <li>Automate the clearing process to optimize financial obligations.</li>
+            </ul>
+            <h2>1.3 Objectives</h2>
+            <p>The objectives of this project are:</p>
+            <ul>
+                <li>To be able to design an order-matching engine based on price-time priority.</li>
+                <li>To implement an order book for recording and updating transactions.</li>
+                <li>To implement clearing mechanism to settle net obligations and provide market analytics.</li>
+            </ul>
+            <h2>1.4 Scope and Limitation</h2>
+            <p> Order Matching and Clearing Obligations is a web-based application tool that enables a trading experience like real time market trading with order placement and matching of those orders. The matched orders are generated using Price/Time algorithm that ensures the generalization of the all the order list as settlement using Tarjan Algorithm. This system provides the user to analyze the market that requires settling the price obligations with various organizations. The scope of this system provides pathway to be used by financial institutions to reduce costs for large orders, brokerages to simplify settlement processes, stock, and commodity exchanges to improve efficiency in matching orders, clearinghouses, and settlement institutions to streamline clearing, asset management firms to settle large trades efficiently, and government and regulatory bodies to ensure market compliance and financial stability.</p>
+            <p>The limitations if this system prevails despite execution of various features. The limitations are given as follows:</p>
+            <ul>
+                <li>The project does not involve real financial transactions or integration with financial markets in live but simulates.</li>
+                <li>The platform primarily supports market and limit order execution; complex order types such as stop-loss, trailing stops, Fill-Or-Kill (FOK) and algorithmic trading are not included in the current scope.</li>
+                <li>The clearing process is limited to an internal netting mechanism clearing obligations within the collected dataset and does not connect with external financial clearinghouses.</li>
+                <li>System performance may degrade under extreme market conditions or high-frequency trading scenarios due to resource constraints.</li>
+                <li>The realized/unrealized gains from the trades are not considered since this is a replication and transactions are records on paper.</li>
+            </ul>
+            <h2>1.5 Development Methodology</h2>
+            <p>   IID (Iterative and Incremental Development) is a software development approach that divides the project into smaller, manageable parts or iterations. Each iteration involves designing, developing, testing, and delivering a portion of the system, which is built upon in subsequent iterations. This approach allows for continuous improvement, flexibility, and early detection of issues, ensuring the final product meets the users’ requirements more effectively.</p>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/iid.png" class="img-fluid rounded mx-auto d-block" alt="Iterative and Incremental Development">
+                <br>
+                <span class="figure">Figure 1.1 Iterative and Incremental Model [1]</span>
+            </div>
+            <p>The developmental process using IID model includes the following characteristics:</p>
+            <ul>
+                <li>
+                    <b>Requirements Gathering:</b>
+                    During this phase, the Price/Time algorithm and Tarjan's netting algorithm were identified as the core components for efficient order matching and settlement, addressing both trade execution priorities and net obligation calculations.
+                </li>
+                <li>
+                    <b>Design and Development:</b>
+                    The Price/Time algorithm was integrated into the order matching engine to prioritize trades based on price and submission timestamp, while the netting algorithm was implemented to calculate the net obligations of trades, reducing the number of transactions for settlement.
+                </li>
+                <li>
+                    <b>Testing:</b>
+                    The algorithms were tested incrementally to ensure accurate order matching under various market conditions and efficient netting of transactions, validating their performance through unit and load testing.
+                </li>
+                <li>
+                    <b> Implementation:</b>
+                    The algorithms were deployed step-by-step, starting in a controlled environment, to ensure they handled real-world trade volumes effectively, with subsequent optimizations based on live feedback and performance data.
+                </li>
+            </ul>
+            <h2>1.6 Report Organization</h2>
+            This report is maintained into the six chapters mentioned below:
+            <br>
+            <h4>Chapter 1: Introduction</h4>
+            <p>The first chapter of this report includes the basic overview of problem statement, objectives, scope, limitation, and the development, methodology approach used in the project.</p>
+            <h4>Chapter 2: Background Study and Literature Review</h4>
+            <p>
+                The second chapter the background study, which provides foundational knowledge of the research topic, and the literature review, which analyzes existing studies, theories, and research gaps relevant to the subject.
+            </p>
+            <h4>Chapter 3: System Analysis</h4>
+            <p>   This chapter covers the requirements, outlining functional and non-functional needs; feasibility analysis, assessing technical, economic, and operational viability; and various diagrams, including class diagrams, activity diagrams, and sequence diagrams, to visually represent system structure, workflow, and interactions.</p>
+            <h4>Chapter 4: System Design</h4>
+            <p>The fourth chapter includes the class, activity, sequence, and component diagrams to illustrate system architecture and interactions, along with detailed explanations of key algorithms such as Price/Time priority for order matching, queue-based processing for trade execution, and Tarjan’s algorithm for netting settlement to optimize transaction processing.</p>
+            <h4>Chapter 5: Implementation and Testing</h4>
+            <p>  This chapter details the tools and technologies used, including the Python Flask framework, libraries such as Pandas, D3.js, Chart.js, and Flask-SQLAlchemy, and the PostgreSQL database platform. It also includes CASE tools like MS Project, Adobe Illustrator, and Draw.io, along with programming tools, frameworks, and libraries. The testing phase covers unit testing, manual testing, and system testing to ensure reliability. The report analysis evaluates system performance, accuracy, efficiency, and overall impact, validating the implementation through test results and real-world scenarios.</p>
+            <h4>Chapter 6: Conclusion and Future Recommendations</h4>
+            <p> The final chapter summarizes the key findings, effectiveness, and impact of the system while highlighting its strengths and limitations. It also provides future recommendations for enhancements, such as optimizing algorithms, integrating advanced analytics, improving scalability, and expanding system functionalities for better efficiency and adaptability.</p>
+            <p> The document concludes with the References section, citing all sources used in research and development, followed by the Appendix, which includes additional materials such as screenshots of the system, diagrams, and other relevant documentation for better understanding and verification.</p>
+            <hr>
+            <h1> Chapter 2: Background Study And Literature Review</h1>
+            <h2>2.1 Background Study</h2>
+            <p>The choice of matching algorithm is an important part of the trading mechanism. The most common matching algorithms are the Pro-Rata and Price/Time algorithms, with minor modifications related mostly to distributing the remaining lots after rounding, and, in the case of the Pro-Rata algorithm, to the time priority for the first price-improving limit order. Both algorithms have certain advantages and disadvantages, and both are used in practice, with Price/Time being more common. [2]</p>
+            <p>
+                Price-time priority uses the submission timestamp which prioritizes orders in the book with the same price. The order which was entered earliest at a given price limit gets executed first. The results obtained from simulations of the order book model show that the larger the limit order rate the larger is the qualitative change of the time-to-fill distribution shape. If we apply a price-time priority allocation method in our order book, we end up with a distribution which has a distinct maximum located at T > 1. [3] Orders placed preopening are matched according to price and time priority. An order does not retain its “time priority” after an order at a better price has been entered. [4]
+            </p>
+            <p>
+                The Price/Time algorithm is chosen for its simplicity and fairness in matching orders. It prioritizes orders based on the submission timestamp, ensuring that the earliest order at a given price limit is executed first. This method promotes transparency and reduces the possibility of manipulation, as orders placed earlier have a higher chance of being matched. Additionally, simulations show that the Price/Time algorithm leads to a distinct time-to-fill distribution, with a maximum located at a certain time threshold, ensuring efficiency in order execution. Its widespread use in practice highlights its effectiveness in maintaining order and fairness in the trading process.
+            </p>
+            <h2>2.2 Literature Review</h2>
+            <h4>Comparison of Price/Time and Pro-Rata</h4>
+            <p>
+                Price/Time algorithm motivates to narrow the spread, since by narrowing the spread the limit order is the first in the order queue. It discourages other orders to join the queue since a limit order that joins the queue is the last. It might be computationally more demanding than pro-rata. The reason is that market participants might want to place more small orders in different positions in the order queue, and also tend to “flood” the market, i.e., place limit order in the depth of the market in order to stay in the queue. [2]
+            </p>
+            <p>
+                The price and time priority algorithm used on Globex gave priority to higher-priced limit bid orders and lower-priced ask orders for execution against incoming market orders. When two or more limit orders stood at the same price, older orders were given priority in execution. [4]
+            </p>
+            <h4>General comment about the Tarjan algorithm</h4>
+            <p>
+                A directed graph is strongly connected if there is a path between all pairs of vertices. A strongly connected component (SCC) of a directed graph is a maximal strongly connected subgraph. Because the invoice graph is a sparse one, in order to efficiently determine the circuits, we have to find first the strongly connected components of the graph, and start the circuit computation on each of these components. In order to determine the SCC, a choice had to be made between the Kosaraju’s algorithm and Tarjan’s algorithm. considering the fact that Kosaraju’s algorithm requires two DFS traversals of the graph, while Tarjan’s algorithm involves only one DFS traversal, the latter one was considered. The time complexity for Tarjan’s algorithm is O(|V |+|E|). [5]
+            </p>
+            <p>   The main procedure tarjan initializes the environment with an empty stack, an empty set of sccs, the fresh serial number 0 and the constant function giving the number −1 to each vertex. The result is the set of components returned by the function dfs called on all vertices in the graph. [6]</p>
+            <p>   Proving the correctness of Tarjan’s algorithm requires surprisingly few, and entirely elementary, concepts of finite graphs. With the exception of the use of the Mathematical Components library for Coq, we therefore did not use existing libraries formalizing advanced concepts of graph theory. [6]</p>
+            <p> When designing a formal representation of an algorithm, one has to decide at what level of abstraction the algorithm should be modeled. For example, the Coq formalization shows that one can represent Tarjan’s algorithm and proof using just serial numbers and the set of strongly connected components found so far, and that the stack used in the algorithm and the colors used in the proof can be reconstructed. [6]</p>
+            <hr>
+            <h1> Chapter 3:     System Analysis</h1>
+            <h2>  3.1 System Analysis</h2>
+            <p>  System analysis is the performance management and documentation of activities related to the life cycle phases of any software. Software Analysis starts with a preliminary analysis and later switches on to a detailed one. During the preliminary analysis the Analyst takes a quick look at what is needed and whether the cost benefits. Detailed analysis studies all the cornered factors, which builds and strengthens the software.</p>
+            In the context of this project, system analysis plays a crucial role in defining the key components of the order matching and clearing platform. The analysis began with a preliminary assessment, identifying core functionalities such as order matching, trade execution, and clearing mechanisms. This phase ensured that the system aligns with industry practices and efficiently handles user transactions.
+            <h3>3.1.1 Requirement Analysis</h3>
+            <h4>
+                i. Functional Requirements
+            </h4>
+            Functional requirements encapsulated those functions that the system must support. These requirements are directly tied to the user's needs and project description.
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/UseCase.png" class="img-fluid" alt="">
+                <span class="figure">Figure 3.1 Use Case Diagram of the system</span>
+            </div>
+            <div class="container">
+                <span class="table table-name">
+                    Table 3.1 Use Case Table
+                </span>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>S.N.</th>
+                        <th>Use-Case Identifier</th>
+                        <th>Use-Case Views Summary</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>Primary Actor</td>
+                        <td>Clearing House</td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Secondary Actor</td>
+                        <td>Client, System</td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Description</td>
+                        <td>The admin can view the orders incoming and their respectable payables and push for their final settlement.</td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>Pre-Condition</td>
+                        <td>The client provides buy or sell order of an asset at a fixed price for certain number of contracts.</td>
+                    </tr>
+                    <tr>
+                        <td>5.</td>
+                        <td>Post-Condition</td>
+                        <td>Any two or more orders are coupled according to the algorithm by the system.</td>
+                    </tr>
+                    <tr>
+                        <td>6.</td>
+                        <td>Failure Scenario</td>
+                        <td>Database failure, Order placement unsuccessful, non-responsive bids/asks.</td>
+                    </tr>
+                </table>
+            </div>
+            <h4>      ii. Non-Functional Requirements</h4>
+            <h3>  3.1.2 Feasibility Analysis</h3>
+            <p>
+                Conducting a feasibility study is a crucial step in system analysis, ensuring that the proposed solution is viable and can be implemented effectively. This phase involves evaluating the technical, economic, operational, legal, and scalability aspects to ensure that the system meets all necessary requirements and can function efficiently within its intended scope. A well-structured feasibility study provides insights into potential risks, constraints, and opportunities, guiding the development process toward an optimized and practical solution. This project was evaluated across multiple feasibility dimensions:
+            </p>
+            <h4>i. Technical</h4>
+            The project is technically feasible with the right expertise in data processing, algorithm implementation, and front-end development.
+            <h4> ii. Operational</h4>
+            The project is operationally feasible with a clear workflow for data simulation, processing, and user-friendly display.
+            <h4> iii. Economic</h4>
+            The project is economically feasible with manageable development costs and potential for revenue through licensing or educational use.
+            <h4> iv. Schedule</h4>
+            The project is schedule feasible with a well-defined project plan, realistic milestones, and adequate time allocation for development and testing. The schedule is given below with Work Breakdown Structure along with Gantt chart.
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/WBS.png" class="img-fluid" alt="">
+                <span class="figure mt-2 mb-2">Figure 3.2 Work Schedule of Order Matching and Netting Algorithm</span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/Gantt.png" class="img-fluid" alt="">
+                <span class="figure mt-2">        Figure 3.3 Gantt Chart of Order Matching and Net Settlement</span>
+            </div>
+            <hr>
+            <h1> Chapter 4:     System Design</h1>
+            <h2>
+                4.1 Design
+            </h2>
+            The design phase follows requirements gathering and focuses on defining the architecture and components of the system. This phase involves creating detailed system specifications, such as data models, user interfaces, and interaction diagrams, which serve as blueprints for development. The design phase ensures that the system's structure is optimized for functionality, performance, and scalability, while also addressing security and usability.
+            <h3>4.1.1 Class Diagram</h3>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/classdiagram.png" class="img-fluid" alt="">
+                <span class="figure mb-2">Figure 4.1 Class Diagram of Order Matching System</span>
+            </div>
+            The class diagram (Figure 4.1) consists of five primary entities: User, MarketData, Order, MatchedOrder, and Holding. The User class manages user credentials and personal details, with methods for password encryption and verification. MarketData stores contract and trade-related information. The Order class handles buy or sell orders placed by users, including their status and timestamp. MatchedOrder represents successfully matched buy and sell orders, capturing buyer, seller, and trade details. Holding tracks a user's stock holdings by symbol and quantity. Relationships between these entities are managed through foreign keys, ensuring efficient data flow across the system.
+            <h3>4.1.2 Activity Diagram</h3>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/activity.png" class="img-fluid" alt="">
+                <span class="figure">Figure 4.2 Activity Diagram of System</span>
+            </div>
+            The above figure 4.2 describes the activity diagram of the Order Matching system that are performed into various steps. The order placement is made with the user input and the validation is made by adding to open section. Once the section is added the Order is placed which updates the OrderBook, The order book after being matched is then removed from the queue, the Order Matching Engine. The order is matched that records the transaction and updates the market data. The order in then filled into the opened session that are filled up in Set Up with run time threading. These are implemented by creating object for each order instance and setting up application. Finally, the graph is maintained by using the netting algorithm, which is then represented in graph form and then tabulated in a table for convenience. The activity is then stopped which was run to perform all the order matching and netting problems.
+            <h3> 4.1.3 Sequence Diagram</h3>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/Sequence_diagram.jpeg" class="img-fluid" alt="">
+                <span class="figure">Figure 4.3 Sequence Diagram of the System</span>
+            </div>
+            The sequence diagram illustrates the sequence of the Order Matching system, the User, Client or admin logs into the system and then the system redirects to the users dashboard that fetches the user input. The user when provides useful login credentials will get into the system that will get to see the users holdings, or the details of the user’s assets. The market after execution is displayed with the MarketData. The data is directly linked with the database where user can place the order and the assets of the user is display to them, the Market updates with the simulation and the LTP is updated along with the data. The assets are frozen to update the order book and when order is matched the status of the order is displayed. Finally, the normalizer provides the netting algorithm to admin which access the data for every institution involved in the trading.
+            <h3>4.1.4 Component Diagram</h3>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/component.png" class="img-fluid" alt="">
+                <span class="figure">Figure 4.4 Component Diagram of the System</span>
+            </div>
+            The above figure 4.4 describes the the system consisting of multiple interconnected components working together to facilitate order matching. The User Interface Component manages user login, password hashing, and role assignments (admin/user). The Order Management Component allows users to place buy and sell orders, storing details like price, quantity, and status. These orders are processed by the Order Matching Engine, which matches buy and sell orders, executes transactions, and updates user holdings. The Market Data Component maintains stock data, trade history, and real-time market updates. After transactions, the Holdings Component tracks user stock holdings. Finally, the Holding Component ensures persistent storage of all data within the Market Data.
+            <h2> 4.2 Algorithm Details</h2>
+            <h3>4.2.1 Price/Time Algorithm</h3>
+            The Price-Time Allocation Model, also known as Price-Time Priority or First In, First Out (FIFO), is a method used in financial markets to determine the order in which trades are executed. This model is widely employed in electronic trading systems, particularly in equity and derivatives markets.
+        
+        Under the Price/Time algorithm, an incoming trade is matched with the first orders (at the best price), which is the so-called FIFO method.
+            <p>
+                Suppose n limit orders Q1, …, Qn of a cumulative volume Q lots, and an incoming trade of N ≤ Q lots. Then there exists an index 1 ≤ j ≤n such that  and the Price/Time algorithm, the first j limit orders are filled in full, and the remaining lots are assigned to the (j + 1)-th limit order
+                <span>(if j  n). [3]</span>
+            </p>
+            <h3> 4.2.2 Queue</h3>
+            A queue is implemented of at most n — 1 elements using an array Q[1..n]. The queue has an attribute Q. head that indexes, or points to, its head. The attribute Q. tail indexes the next location at which a newly arriving element will be inserted into the queue. The elements in the queue reside in locations Q.head, Q.head + l, …, Q.tail — 1, where we "wrap around" in the sense that location 1 immediately follows location n in a circular order. When Q.head = Q.tail, the queue is empty. Initially, we have Q.head = Q.tail = 1. If we attempt to dequeue an element from an empty queue, the queue underflows. [7]
+            <div class="justify-content-center align-items-center center text-center">
+                <div class="d-flex">
+                    <img src="../../../static/images/Enqueue.png" class="img-fluid" alt="">
+                    <img src="../../../static/images/Dequeue.png" class="img-fluid" alt="">
+                </div>
+                <span class="figure">Figure 4.5 Queuing Algorithm pseudocode [7]</span>
+            </div>
+            We call the INSERT operation on a queue ENQUEUE, and we call the DELETE operation DEQUEUE; like the stack operation POP, DEQUEUE takes no element argument. The FIFO property of a queue causes it to operate like a line of customers waiting to pay a cashier. The queue has a head and a tail. When an element is enqueued, it takes its place at the tail of the queue. [7]
+            <h3>4.2.3 Maximum Priority Queue</h3>
+            A maximum priority queue is a data structure that stores elements with associated priorities and allows efficient access to the element with the highest priority. In this queue, the element with the maximum priority is always dequeued first.
+        
+        Maximum priority queue can be used in order matching in financial markets, particularly in matching buy and sell orders based on price and time priorities.
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/Max-priority queue.png" class="img-fluid" alt="">
+                <span class="figure">Figure 4.6 Max-Priority Queue Algorithm pseudocode [7]</span>
+            </div>
+            Maximum priority queue can be applied in flowing ways:
+        
+        ·         Buy Orders: Buy orders can be stored in a priority queue, where the highest price is given the maximum priority. When a new sell order comes in, the system checks the queue to find the highest-priced buy order that matches the sell order.
+        
+        ·         Sell Orders: Sell orders can also be stored in a priority queue, where the lowest price is given the maximum priority. When a new buy order comes in, the system checks the queue to find the lowest-priced sell order that matches the buy order.
+            <h3>4.2.4 Netting Algorithm</h3>
+            The input of the problem is a directed graph G = (V, E), with a cost w : E → R associated to each edge. The operation of settling a circuit consists of decreasing the value of all the edges in the circuit with the minimum value of an edge in that circuit. That is, given a circuit (v1, v2, . . ., vk, v1), let x be the minimum value of an edge in the circuit, i.e.,  by replacing the weight for each edge w(vi ,vi+1) with w’(vi ,vi+1) = w(vi ,vi+1) - x respectively w’(vk, v1) = w(vk, v1) − x.
+        
+        The goal of the netting problem is to find an ordered set of circuits such that settling them in the prescribed order maximizes the total netted amount. [5]
+        
+        Tarjan’s Algorithm
+        Tarjan's Algorithm is a graph-based algorithm primarily used for finding strongly connected components (SCCs) in a directed graph. In the context of netting settlement, Tarjan's algorithm can be adapted to help optimize the process of reducing and settling financial obligations between parties.
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="../../../static/images/Tarjan-Algorithm.png" class="img-fluid" alt="">
+                <span class="figure">Figure 4.7 Tarjan Algorithm pseudocode for Netting Settlement [5]</span>
+            </div>
+            <p>Tarjan algorithm is based on following ideas (Figure 4.7):</p>
+            <ul>
+                <li>A DFS tree/forest is obtained through a DFS search;</li>
+                <li>SCCs represent subtrees of the DFS tree;</li>
+                <li>Starting from the head of a subtree, all the other nodes in the SCC can be obtained;</li>
+                <li>There is no back edge from one SCC to another. (There can be cross edges, but cross edges will not be used while processing the graph). [5]</li>
+            </ul>
+            <p>
+                Using this we can further conclude that the Tarjan Algorithm is used in following ways:
+            </p>
+            <ul>
+                <li>
+                    <b>Graph Representation:</b>
+                    Each participant is represented as a node, and an edge between two nodes indicates an obligation between those participants.
+                </li>
+                <li>
+                    <b>Strongly Connected Components (SCCs):</b>
+                    Using Tarjan's algorithm, the system identifies SCCs in the graph. These components represent groups of participants who are connected via obligations, meaning each participant in the component has a direct or indirect obligation to the others in that component.
+                </li>
+                <li>
+                    <b>Netting Obligations:</b>
+                    After identifying the SCCs, the net obligations can be calculated within each SCC. The system can then "net" the obligations within each SCC, simplifying the number of transactions.
+                </li>
+            </ul>
+            <hr>
+            <h1>Chapter 5:     Implementation and Testing</h1>
+            <h2> 5.1 Implementation</h2>
+            Implementation phase includes translating the business logic from system design phase into code and implementing them in an application. The iterative approach allowed for gradually building up features reconsidering every design choice made, and correcting them early on. The Tools used are as follows.
+            <h3>5.1.1 Tools Used</h3>
+            <p>Order Matching and Netting Settlement development required various tools while implementing the features collected through the phases of requirements collection, analysis, design, implementation, testing and documentation. These tools are classified into their respective category that defines their usability.</p>
+            <h4> 5.1.1.1 CASE tools</h4>
+            <p>
+                CASE (Computer-Aided Software Engineering) tools in IID (Iterative and Incremental Development) are software tools that support the development process by automating various tasks such as design, coding, testing, and documentation across multiple iterations, enhancing efficiency and ensuring consistent quality throughout the project lifecycle.
+            </p>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <h5>MS-Project</h5>
+                    </td>
+                    <td>Microsoft-Project is a project management tool which has been used to create the Work Breakdown Structure (WBS) and the Gantt Chart for the system.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>Draw.io</h5>
+                    </td>
+                    <td>Draw.io is a diagramming tool which has been utilized for creation of various diagrams of the system for analysis and design of the project infrastructure.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5> Adobe Illustrator</h5>
+                    </td>
+                    <td> Illustrator is a graphics designing tool that is used to design the vector images of a graphic product. This tool was used to visualize the product interface.</td>
+                </tr>
+            </table>
+            <h4>5.1.1.2 Programming languages</h4>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <h5> HTML</h5>
+                    </td>
+                    <td>
+                        <p> It is a standard markup language for documents to be displayed in a web browser. It was used to display the content and structures of the web pages in our project.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>CSS</h5>
+                    </td>
+                    <td>
+                        <p>
+                            It is used to apply stylistics attributes to different HTML elements to be displayed, enabling the separation of presentation and content. It allows a good visualization of the web page.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5> JavaScript</h5>
+                    </td>
+                    <td>
+                        <p>It was used to introduce dynamic properties in our web page. Many HTML elements were dynamically added such as tables for order book, floor-sheet and order list where the number of rows are not fixed but the attributes.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>Python</h5>
+                    </td>
+                    <td>
+                        <p> Python is a high level, general-purpose programming language utilized to implement the order matching and netting algorithms to perform the order match simulations.</p>
+                    </td>
+                </tr>
+            </table>
+            <h4>5.1.1.3 Framework</h4>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <h5>Bootstrap</h5>
+                    </td>
+                    <td>
+                        <p> Bootstrap is a front-end framework used for developing responsive and mobile-first websites, providing pre-designed HTML, CSS, and JavaScript components for faster web development.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5> Flask</h5>
+                    </td>
+                    <td>
+                        <p> Flask is a lightweight web framework in Python, used for building web applications, offering flexibility for integration with various systems and the ability to develop RESTful APIs.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>unittest</h5>
+                    </td>
+                    <td>
+                        <p>unittest is a testing framework in Python used to create and run unit tests, ensuring that individual components of the system work as expected.</p>
+                    </td>
+                </tr>
+            </table>
+            <h4>5.1.1.4 Libraries</h4>
+            A library is a collection of pre-written code that you can use to perform specific tasks. Libraries are often used to reduce the amount of code a programmer needs to write by providing reusable functions or classes that can be called upon as needed. [8]
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <h5>D3.js</h5>
+                    </td>
+                    <td>
+                        <p>D3.js is an open-source JavaScript library for creating interactive visuals which has been used in this project for graph visualization and traversal of algorithm steps visually.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>Pandas</h5>
+                    </td>
+                    <td>
+                        <p> Pandas is a powerful and open-source Python library designed for data manipulation and analysis. The system uses this library to access the CSV files into database model.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>flask_login</h5>
+                    </td>
+                    <td>
+                        <p>Flask-Login provides user session management for Flask. It handles the common tasks of logging in, logging out, and remembering your users' sessions over extended periods of time. [9]</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>flask_sqlalchemy</h5>
+                    </td>
+                    <td>
+                        <p>Flask_sqlalchemy is used to integrate SQLAlchemy with Flask, providing an easy way to interact with databases through ORM (Object-Relational Mapping) for data storage and retrieval.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>werkzeug.security</h5>
+                    </td>
+                    <td>
+                        <p>Flask uses werkzeug.security for securely hashing passwords and performing cryptographic operations like authentication and password verification in Flask applications. The user login passwords created by the model are hashed.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>Flask-SocketIO</h5>
+                    </td>
+                    <td>
+                        Flask-SocketIO gives Flask applications access to bi-directional communications between clients and the server. This library is utilized in the to implement server hosting in the project.
+                    </td>
+                </tr>
+            </table>
+            <h4>5.1.1.5 Database platforms</h4>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <h5>SQLAlchemy</h5>
+                    </td>
+                    <td>
+                        <p> SQLAlchemy is an SQL toolkit and Object-Relational Mapping (ORM) library for Python, allowing seamless integration between relational databases and Python applications. The models access the sqlalchemy and stores the generated order matching processes.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>PostgreSQL</h5>
+                    </td>
+                    <td>
+                        <p> PostgreSQL is an open-source, highly extensible relational database management system known for its robustness, support for complex queries, and ACID compliance. PostgreSQL is used to verify and check the database table components and attributes</p>
+                    </td>
+                </tr>
+            </table>
+            <h2>5.2 Testing</h2>
+            <h3>5.2.1 Test Cases for Unit Testing</h3>
+            <div class="justify-content-center align-items-center center text-center">
+                <span class="table table-name">Table 5.1 Test Case for User Authentication</span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Test Name</td>
+                    <td>Test for the user authentication</td>
+                    <td>Test Case ID</td>
+                    <td>TC01</td>
+                </tr>
+                <tr>
+                    <td>Test Case Description</td>
+                    <td>To verify the authentication into the user interface</td>
+                    <td>Test Priority</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Prerequisite</td>
+                    <td>N/A</td>
+                    <td>Post Condition</td>
+                    <td>N/A</td>
+                </tr>
+            </table>
+            Test Steps:
+            <table class="table table-bordered">
+                <tr>
+                    <td>S.N.</td>
+                    <td>Action</td>
+                    <td>Test Steps</td>
+                    <td>Test Result</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Test login with correct credentials</td>
+                    <td>
+                        Test Module: test_auth
+                        <br>
+                        Test Data:
+                        <br>
+                        'username': 'admin', 'password': 'order_match’
+                        <br>
+                        Tested Functionality: Login
+                        <br>
+                        Assertion Used: assertIn(b"dashboard", response.data)
+                        <br>
+                        Expected Result: dashboard
+                    </td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Test login with wrong credentials</td>
+                    <td>
+                        Test Module: test_auth
+                        <br>
+                        Test Data:
+                        <br>
+                        'username': 'testuser', 'password': 'testpassword'
+                        <br>
+                        Tested Functionality: Login
+                        <br>
+                        Assertion Used: assertIn(b"dashboard", response.data)
+                        <br>
+                        Expected Result: failure
+                    </td>
+                    <td>PASS</td>
+                </tr>
+            </table>
+            <h3>Manual Testing</h3>
+            <p>The frontend interface of the system functionality is tested using manual testing methodology. All the test cases mentioned are done specifically for web client.</p>
+            <div class="justify-content-center align-items-center center text-center">
+                <span class="table table-name">
+                    Table 5.2 Test Case for Login Page
+                </span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Test Name</td>
+                    <td>Test for the display of the login page</td>
+                    <td>Test Case ID</td>
+                    <td>TC02</td>
+                </tr>
+                <tr>
+                    <td>Test Case Description</td>
+                    <td>To verify the Login page is correctly displayed</td>
+                    <td>Test Priority</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Prerequisite</td>
+                    <td>N/A</td>
+                    <td>Post Condition</td>
+                    <td>N/A</td>
+                </tr>
+            </table>
+            Test Steps:
+            <table class="table table-bordered">
+                <tr>
+                    <td>S.N.</td>
+                    <td>Action</td>
+                    <td>Test Steps</td>
+                    <td>Expected Result</td>
+                    <td>Actual Result</td>
+                    <td>Test Result</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Execute the flask program</td>
+                    <td></td>
+                    <td>Login Page is loaded in web server.</td>
+                    <td>Same as Expected Result</td>
+                    <td>
+                        PASS
+                    </td>
+                </tr>
+            </table>
+            <div class="justify-content-center align-items-center center text-center">
+                <span class="table table-name">
+                    Table 5.3 Test Case for Admin Dashboard
+                </span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Test Name</td>
+                    <td>Test to display admin dashboard</td>
+                    <td>Test Case ID</td>
+                    <td>TC03</td>
+                </tr>
+                <tr>
+                    <td>Test Case Description</td>
+                    <td>To verify the admin dashboard is correctly displayed</td>
+                    <td>Test Priority</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>Prerequisite</td>
+                    <td>User inputs login credential</td>
+                    <td>Post Condition</td>
+                    <td>Admin Dashboard</td>
+                </tr>
+            </table>
+            Test Steps:
+            <table class="table table-bordered">
+                <tr>
+                    <td>S.N.</td>
+                    <td>Action</td>
+                    <td>Test Steps</td>
+                    <td>Expected Result</td>
+                    <td>Actual Result</td>
+                    <td>Test Result</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Logs into the system</td>
+                    <td></td>
+                    <td>Admin Dashboard is shown</td>
+                    <td>Same as Expected Result</td>
+                    <td>
+                        PASS
+                    </td>
+                </tr>
+            </table>
+            <div class="justify-content-center align-items-center center text-center">
+                <span class="table table-name">Table 5.4 Test Case for User Management Tab</span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Test Name</td>
+                    <td>Test to display user management page</td>
+                    <td>Test Case ID</td>
+                    <td>TC04</td>
+                </tr>
+                <tr>
+                    <td>Test Case Description</td>
+                    <td>To verify the user management tab executes the routing to SPA pages</td>
+                    <td>Test Priority</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>Prerequisite</td>
+                    <td>N/A</td>
+                    <td>Post Condition</td>
+                    <td>N/A</td>
+                </tr>
+            </table>
+            Test Steps:
+            <table class="table table-bordered">
+                <tr>
+                    <td>S.N.</td>
+                    <td>Action</td>
+                    <td>Test Steps</td>
+                    <td>Expected Result</td>
+                    <td>Actual Result</td>
+                    <td>Test Result</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Press Sidebar Menu named User Management</td>
+                    <td>1. Navigate to Sidebar Menu</td>
+                    <td>Sub menu list items are loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Press Create User List</td>
+                    <td>
+                        1. Click User Management
+                        <br>
+                        2. Click on Create User tab
+                    </td>
+                    <td>Create User tab is loaded in SPA</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>Press View User List</td>
+                    <td>
+                        1. Click User Management
+                        <br>
+                        2. Click on View User tab
+                    </td>
+                    <td>View User tab is loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>
+                        PASS
+                    </td>
+                </tr>
+            </table>
+            <div class="justify-content-center align-items-center center text-center">
+                <span class="table table-name">Table 5.5 Test Case for Logout</span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Test Name</td>
+                    <td>Test to execute session logout</td>
+                    <td>Test Case ID</td>
+                    <td>TC05</td>
+                </tr>
+                <tr>
+                    <td>Test Case Description</td>
+                    <td>To verify the logout is executed effectively</td>
+                    <td>Test Priority</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>Prerequisite</td>
+                    <td>Logs into system</td>
+                    <td>Post Condition</td>
+                    <td>Login Page</td>
+                </tr>
+            </table>
+            Test Steps:
+            <table class="table table-bordered">
+                <tr>
+                    <td>S.N.</td>
+                    <td>Action</td>
+                    <td>Test Steps</td>
+                    <td>Expected Result</td>
+                    <td>Actual Result</td>
+                    <td>Test Result</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Press Sidebar Menu named Logout</td>
+                    <td></td>
+                    <td>Login Page is loaded ending the user session</td>
+                    <td> Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+            </table>
+            <div class="justify-content-center align-items-center center text-center">
+                <span class="table table-name">Table 5.6 Test Case for Market Summary Tab</span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Test Name</td>
+                    <td>Test to display Market Summary</td>
+                    <td>Test Case ID</td>
+                    <td>TC06</td>
+                </tr>
+                <tr>
+                    <td>Test Case Description</td>
+                    <td>To verify the admin dashboard is correctly displayed</td>
+                    <td>Test Priority</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>Prerequisite</td>
+                    <td>N/A</td>
+                    <td>Post Condition</td>
+                    <td>Admin Dashboard</td>
+                </tr>
+            </table>
+            Test Steps:
+            <table class="table table-bordered">
+                <tr>
+                    <td>S.N.</td>
+                    <td>Action</td>
+                    <td>Test Steps</td>
+                    <td>Expected Result</td>
+                    <td>Actual Result</td>
+                    <td>Test Result</td>
+                </tr>
+                <tr>
+                    <td>
+                        1.
+                    </td>
+                    <td>
+                        Sidebar Menu named Market Summary
+                    </td>
+                    <td>1. Navigate to Sidebar Menu</td>
+                    <td>Sub menu list items are loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Press Market Depth</td>
+                    <td>
+                        1. Click Market Summary
+                        <br>
+                        2. Click on Market Depth tab
+                    </td>
+                    <td>Market Depth tab is loaded in SPA</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>Press Market Watch List</td>
+                    <td>
+                        1. Click Market Summary
+                        <br>
+                        2. Click on Market Watchlist tab
+                    </td>
+                    <td>Market Watchlist tab is loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>
+                        PASS
+                    </td>
+                </tr>
+            </table>
+            <h3>5.2.2 Test Cases for System Testing</h3>
+            <div class="justify-content-center align-items-center center text-center">
+                <span class="table table-name">Table 5.7 System Testing</span>
+            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <td>Test Name</td>
+                    <td>System Testing</td>
+                    <td>Test Case ID</td>
+                    <td>TC07</td>
+                </tr>
+                <tr>
+                    <td>Test Case Description</td>
+                    <td>Overall System Testing</td>
+                    <td>Test Priority</td>
+                    <td>Low</td>
+                </tr>
+                <tr>
+                    <td>Prerequisite</td>
+                    <td>Editor is loaded</td>
+                    <td>Post Condition</td>
+                    <td>Simulation Result</td>
+                </tr>
+            </table>
+            Test Steps:
+            <table class="table table-bordered">
+                <tr>
+                    <td>S.N.</td>
+                    <td>Action</td>
+                    <td>Test Steps</td>
+                    <td>Expected Result</td>
+                    <td>Actual Result</td>
+                    <td>Test Result</td>
+                </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>Enter Login Credential</td>
+                    <td>
+                        1. Input the user credentials, username, and password
+                        <br>
+                        2. Press the Login Button
+                    </td>
+                    <td>The dashboard page is loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Analytics</td>
+                    <td>
+                        1. Navigate to Sidebar Menu
+                        <br>
+                        2. Press analytics
+                    </td>
+                    <td>Analytics page is loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>User Management</td>
+                    <td>
+                        1. Navigate to Sidebar Menu
+                        <br>
+                        2. Press User Management
+                    </td>
+                    <td>User Management sidebar is expanded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Create User</td>
+                    <td>
+                        1. Navigate to User management and press
+                        <br>
+                        2. Press Create User
+                        <br>
+                        3. Input the User details
+                    </td>
+                    <td>
+                        1. Create User tab is loaded
+                        <br>
+                        2. New User created message
+                    </td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>5.</td>
+                    <td>View User</td>
+                    <td>
+                        1. Navigate to User management and press
+                        <br>
+                        2. Press View User
+                        <br>
+                        3. Click on Search with input of username, email or demat id
+                    </td>
+                    <td>List of User are loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>6.</td>
+                    <td>Market Summary</td>
+                    <td>
+                        1. Navigate to Sidebar
+                        <br>
+                        2. Press Market Summary tab
+                    </td>
+                    <td>Market Summary sidebar is expanded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>7.</td>
+                    <td>Market Depth</td>
+                    <td>
+                        1. Navigate to Market Summary sidebar and press
+                        <br>
+                        2. Press Market Depth
+                    </td>
+                    <td>1. Market Depth tab is loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>8.</td>
+                    <td>Place Order</td>
+                    <td>
+                        1. Navigate to Market Summary sidebar and press
+                        <br>
+                        2. Press Market Depth
+                        <br>
+                        3. Choose the stockSymbol
+                        <br>
+                        4. Place the order input with reference to LTP
+                    </td>
+                    <td>
+                        1. Market Depth is loaded
+                        <br>
+                        2. Order Placement input is loaded
+                        <br>
+                        3. The order is placed with value
+                    </td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>9.</td>
+                    <td>Order Book Update for Buy</td>
+                    <td>
+                        1. Choose the stockSymbol
+                        <br>
+                        2. Place the order input with reference to LTP, Quantity: 50, Rate: 525
+                    </td>
+                    <td>
+                        1. Order Book is updated
+                        <br>
+                        2. Order is placed
+                    </td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>10.</td>
+                    <td>Order Book Update for Sell</td>
+                    <td>
+                        1. Choose the stockSymbol
+                        <br>
+                        2. Place the order input with reference to LTP, Quantity: 10, Rate: 530
+                    </td>
+                    <td>
+                        1. Order Book is updated
+                        <br>
+                        2. Order is placed
+                    </td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>11.</td>
+                    <td>Order Book Matching Update</td>
+                    <td>
+                        1. Navigate to Order Book
+                        <br>
+                        2. Wait for order to Match
+                    </td>
+                    <td>1. Order is matched and dashboard removes the order</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>12.</td>
+                    <td>Holdings Update</td>
+                    <td>1. Navigate to Holdings</td>
+                    <td>1. Order is updated on the table</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>13.</td>
+                    <td>Graph</td>
+                    <td>
+                        1. Navigate to Sidebar
+                        <br>
+                        2. Press Graph tab
+                    </td>
+                    <td>Graph tab is loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>14.</td>
+                    <td>Symbol based graph</td>
+                    <td>
+                        1. Navigate to Sidebar
+                        <br>
+                        2. Press Graph tab
+                        <br>
+                        3. Choose Broker name and symbol from dropdown
+                    </td>
+                    <td>Before and After Normalization (Netting) is loaded</td>
+                    <td>Same as Expected Result</td>
+                    <td>PASS</td>
+                </tr>
+                <tr>
+                    <td>15.</td>
+                    <td>Logout</td>
+                    <td>
+                        1. Navigate to Sidebar
+                        <br>
+                        2. Press Logout
+                    </td>
+                    <td>Session is ended for the user and logs out</td>
+                    <td>Same as Expected Result</td>
+                    <td>
+                        PASS
+                    </td>
+                </tr>
+            </table>
+            <h2> 5.3 Result Analysis</h2>
+            <p>The Order Matching and & Clearing Obligations system successfully integrates core functionalities such as price/time priority matching, user authentication, and market data processing. During testing, the system demonstrated effective handling of real-time order placements, ensuring quick execution through the Price/Time algorithm. The netting algorithm significantly reduced transaction volumes, optimizing the settlement process. Performance tests confirmed the system's ability to manage a high volume of orders without significant delays, even under peak load. The integration of user roles (admin and regular users) and secure login via hashed passwords provided a robust and secure platform. Overall, the system met the functional requirements, offering a reliable solution for automated order matching and settlement in financial markets.</p>
+            <hr>
+            <h1>Chapter 6:     Conclusion and Future Recommendations</h1>
+            <h2> 6.1 Conclusion</h2>
+            <p>
+                The project successfully implements a platform where orders in large volume is matched with extended net settlement functionalities. The system efficiently handles order execution and financial clearing using robust algorithms, ensuring fair and transparent process. By utilizing a price-time priority matching mechanism, the platform maintains the integrity of transactions while minimizing market inefficiencies.
+            </p>
+            <p>
+                The implementation of the order book ensures that all trade activities are well-documented and organized, enhancing user confidence in the system. Additionally, the clearing mechanism, powered by a Tarjan’s Algorithm, reduces financial risk and optimizes settlement obligations. The integration of real-time data processing and market analytics tools further enriches user experience, providing traders with valuable insights for decision-making.
+            </p>
+            <p>
+                Despite the successful development of the platform, challenges such as handling extreme market conditions, reducing user order processing latency, and ensuring scalability remain areas for further improvement. Security measures also continue to evolve, requiring continuous updates to mitigate potential threats and vulnerabilities. The project serves as a strong foundation for future enhancements in financial market simulations and real-world trading applications.
+            </p>
+            <h2>
+                6.2 Future Recommendations
+            </h2>
+            To further enhance the functionality and efficiency of the platform, the following improvements and features are recommended:
+            <ol>
+                <li>
+                    <p>Algorithm Optimization: Enhance performance for high-frequency trading in stock Market by refining the order-matching algorithm to process larger trade volumes with reduced latency.</p>
+                </li>
+                <li>
+                    <p>Scalability and Performance: Optimize the system for scalability to handle larger code bases efficiently. Implement parallel processing and distributed computing strategies for enhanced performance among various clearing houses</p>
+                </li>
+                <li>
+                    <p>Multi-Asset Trading: Expand the platform to support futures and commodities allowing users to diversify their trading portfolios.</p>
+                </li>
+                <li>
+                    <p>Integration with Real Markets: Establish API connections to live trading exchanges to simulate real-world financial environments and improve market realism.</p>
+                </li>
+                <li>
+                    <p>Improved User Interface: Enhance the UI/UX design to provide a more seamless and intuitive experience for traders of all skill levels.</p>
+                </li>
+                <li>
+                    <p>Automated Trading Strategies: Incorporate AI and machine learning algorithms to enable automated trading strategies based on historical data and real-time market trends.</p>
+                </li>
+                <li>
+                    <p>Scalability Enhancements: Improve infrastructure and database optimization to handle even much larger number of concurrent users and transactions efficiently.</p>
+                </li>
+            </ol>
+            <p>
+                By implementing these enhancements, the platform can evolve into a more robust and versatile trading system, catering to a broader audience while maintaining high performance, security, and regulatory standards. The system efficiently handles order execution and financial clearing using robust algorithms.
+            </p>
+            <h1>References</h1>
+            <a href="">[1]</a>
+            "Geeks For Geeks," [Online]. Available: https://www.geeksforgeeks.org/software-development-process/. [Accessed January 2025].
+            <br>
+            <a href="">[2]</a>
+            K. a. K. M. Janeček, "Matching Algorithms of International Exchanges," Working paper, 2007.
+            <br>
+            <a href="">[3]</a>
+            T. Preis, "Price-Time Priority and Pro Rata Matching in an Order Book Model of Financial Markets," in Econophysics of Order-driven Markets: Proceedings of Econophys-Kolkata V, Milano, Springer Milan, 2011, pp. 65--72.
+            <br>
+            <a href="">[4]</a>
+            M. P. a. P. S. Kritzman, "An Empirical Analysis of Price and Time Priority and Pro Rata Trade Execution Algorithms in Screen-Traded Markets," The Journal of Derivatives, vol. 7, pp. 41-49, 1999.
+            <br>
+            <a href="">[5]</a>
+            C. C. J.-J. L. S. M. L. T. Ran Chen, "Formal Proofs of Tarjan's Strongly Connected Components Algorithm in Why3, Coq, and Isabelle," in 10th Intl. Conf. Interactive Theorem Proving, Schloss Dagstuhl - Leibniz-Zentrum, 2019.
+            <br>
+            <a href="">[6]</a>
+            C. E. L. R. L. R. a. C. S. T. H. Cormen, Introduction to Algorithms, The MIT Press, 2022.
+            <br>
+            <a href="">[7]</a>
+            L.-I. G. a. A. Popa, "A novel algorithm for clearing financial obligations between companies - An application within the Romanian Ministry of economy," Algorithmic Finance, vol. 9, pp. 49-60, 2021.
+            <br>
+            <a href="">[8]</a>
+            G. Woke, "The difference between libraries and frameworks," Redgate, 24 March 2023. [Online]. Available: https://www.red-gate.com/simple-talk/development/other-development/the-difference-between-libraries-and-frameworks/. [Accessed January 2025].
+            <br>
+            <a href="">[9]</a>
+            "Flask-Login 0.6.3," 30 October 2023. [Online]. Available: https://pypi.org/project/Flask-Login/. [Accessed January 2025].
+            <br>
+            <h1> Appendix</h1>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  A: User Login Portal
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  B: Analytics Page
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  C: Create User Page
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  D: Search Users
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  E: Order Book
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  F: Oder Input
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  G: Order Placement
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  H: Graph View
+                </span>
+            </div>
+            <div class="justify-content-center align-items-center center text-center">
+                <img src="" class="img-fluid" alt="">
+                <span class="figure">
+                    Appendix  I: Net Settlement
+                </span>
+            </div>
+        </div>
+    </div>

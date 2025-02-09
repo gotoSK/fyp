@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-header">
+        <h3>
+            <i class="bi bi-bar-chart-fill mx-2"></i>
+            Analytics
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="col-lg-5 col-md-6 col-sm-12 mb-2 ">
+            <h3>Market Execution</h3>
+            <p>Start the market only when necessary!!!</p>
+            <form action="{{ url_for('routes.load_csv') }}" method="post">
+                <button type="submit" class="btn btn-warning disabled" disabled>
+                    <i class="bi bi-file-earmark-spreadsheet mx-2"></i>
+                    Load CSV
+                </button>
+            </form>
+            <br>
+            <form action="{{ url_for('routes.market_control') }}" method="POST">
+                <button
+                    type="submit"
+                    name="action"
+                    value="start"
+                    class="btn btn-success"
+                >
+                    <i class="bi bi-play-circle mx-2"></i>
+                    Start Market
+                </button>
+                <button
+                    type="submit"
+                    name="action"
+                    value="stop"
+                    class="btn btn-danger"
+                >
+                    <i class="bi bi-pause-circle mx-2"></i>
+                    Stop Market
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

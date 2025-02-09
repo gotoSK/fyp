@@ -1,0 +1,151 @@
+<div class="card mt-2">
+    <div class="card-header">
+        <h3>
+            <i class="bi bi-gear-fill mx-2"></i>
+            Settings
+        </h3>
+    </div>
+    <div class="custom-tabs-container p-4">
+        <ul class="nav nav-tabs" id="customTab2" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link active"
+                    id="tab-oneA"
+                    data-bs-toggle="tab"
+                    href="#oneA"
+                    role="tab"
+                    aria-controls="oneA"
+                    aria-selected="true"
+                >General</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link"
+                    id="tab-twoA"
+                    data-bs-toggle="tab"
+                    href="#twoA"
+                    role="tab"
+                    aria-controls="twoA"
+                    aria-selected="false"
+                    tabindex="-1"
+                >Settings</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a
+                    class="nav-link"
+                    id="tab-threeA"
+                    data-bs-toggle="tab"
+                    href="#threeA"
+                    role="tab"
+                    aria-controls="threeA"
+                    aria-selected="false"
+                    tabindex="-1"
+                >Credit Cards</a>
+            </li>
+        </ul>
+        <div class="tab-content ">
+            <div
+                class="tab-pane fade active show"
+                id="oneA"
+                role="tabpanel"
+                aria-labelledby="tab-oneA"
+            >
+                <!-- Row start -->
+                <div class="row gx-3 justify-content-between">
+                    <div class="col-sm-12 col-12">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h5 class="card-title">Personal Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="fs-4">{{ user.first_name | replace("None", "") }} {{ user.middle_name | replace("None", "") }} {{ user.last_name | replace("None", "") }}</div>
+                                <hr>
+                                <div class="row ">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <b> Address:</b>
+                                            </div>
+                                            <div class="col-8">
+                                                {{user.city | replace("None", "")}}, {{user.district | replace("None", "")}}, {{user.province | replace("None", "")}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <b>  Email:</b>
+                                            </div>
+                                            <div class="col-8">
+                                                {{user.email}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <b>   Mobile:</b>
+                                            </div>
+                                            <div class="col-8">
+                                                {{user.phone_number | replace("None", "")}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <b> Admin:</b>
+                                        {{user.is_admin}}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row ">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <b>  Demat Details:</b>
+                                        </div>
+                                        <div class="col-8">
+                                            {{user.demat_id | replace("None", "")}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row ">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <b> Collateral Details:</b>
+                                        </div>
+                                        <div class="col-8">
+                                            {{user.collateral}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-12"></div>
+                </div>
+                <!-- Row end -->
+            </div>
+            <div
+                class="tab-pane fade"
+                id="twoA"
+                role="tabpanel"
+                aria-labelledby="tab-twoA"
+            >
+                Coming Soon
+                <!-- Row start -->
+            </div>
+            <div
+                class="tab-pane fade"
+                id="threeA"
+                role="tabpanel"
+                aria-labelledby="tab-threeA"
+            >
+                <!-- Row start -->
+                <div class="row gx-3">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            Coming Soon
+                        </div>
+                    </div>
+                </div>
+                <!-- Row end -->
+            </div>
+        </div>
+    </div>
+</div>

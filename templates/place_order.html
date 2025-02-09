@@ -1,0 +1,45 @@
+<!-- place_order.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Place Order</title>
+    </head>
+    <body>
+        <h1>Place Order</h1>
+        <form method="POST">
+            <label for="symbol">Stock Symbol:</label>
+            <input
+                type="text"
+                id="symbol"
+                name="symbol"
+                required
+            >
+            <br>
+            <label for="price">Price:</label>
+            <input
+                type="number"
+                id="price"
+                name="price"
+                step="0.01"
+                required
+            >
+            <br>
+            <label for="quantity">Quantity:</label>
+            <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                required
+            >
+            <br>
+            <label for="order_type">Order Type:</label>
+            <select id="order_type" name="order_type">
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+            </select>
+            <br>
+            <button type="submit">Place Order</button>
+        </form>
+    </body>
+</html>

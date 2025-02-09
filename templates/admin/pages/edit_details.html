@@ -1,0 +1,121 @@
+<div class="card">
+    <div class="card-header">
+        <h3>
+            <i class="bi bi-gear mx-2"></i>
+            Settings
+        </h3>
+    </div>
+    <div class="card-body">
+        <form action="/admin/edit_user/${userId}" method="POST">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                            <label for="first_name">First Name</label>
+                            <input
+                                class="form-control disabled"
+                                type="text"
+                                name="first_name"
+                                value="{{user.first_name}}"
+                            >
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                            <label for="middle_name">Middle Name</label>
+                            <input
+                                class="form-control disabled"
+                                type="text"
+                                name="middle_name"
+                                value="{{user.middle_name}}"
+                            >
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                            <label for="last_name">Last Name</label>
+                            <input
+                                class="form-control disabled"
+                                type="text"
+                                name="last_name"
+                                value="{{user.last_name}}"
+                            >
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                            <label for="username">Username</label>
+                            <input
+                                class="form-control disabled"
+                                type="text"
+                                name="username"
+                                value="{{user.username}}"
+                            >
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                            <label for="password">Password</label>
+                            <input
+                                class="form-control disabled"
+                                type="password"
+                                name="password"
+                                value="{{user.password}}"
+                            >
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                            <label for="phone_number">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">+977</span>
+                                <input
+                                    class="form-control disabled"
+                                    type="text"
+                                    name="phone_number"
+                                    value="{{user.phone_number}}"
+                                >
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label for="email">Email</label>
+                            <input
+                                class="form-control disabled"
+                                type="email"
+                                name="email"
+                                value="{{user.email}}"
+                            >
+                        </div>
+                        <div class="col-6 mb-2">
+                            <label for="demat_id">Demat Id</label>
+                            <input
+                                class="form-control disabled"
+                                type="text"
+                                name="demat_id"
+                                value="{{user.email}}"
+                            >
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                            <label for="collateral">Collateral Amount</label>
+                            <input
+                                class="form-control disabled"
+                                type="number"
+                                name="collateral"
+                                value="{{user.collateral}}"
+                            >
+                        </div>
+                        <div class="col-lg-3 col-12 mt-4">
+                            <div class="form-check me-1 ">
+                                <input
+                                    class="form-check-input  "
+                                    type="checkbox"
+                                    name="is_admin"
+                                    value="true"
+                                    id="flexCheckDefault"
+                                >
+                                <label class="form-check-label" for="flexCheckDefault">Admin Access</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 mt-2">
+                    Fill up the necessary information to create a new user to access trading
+                    <button class="form-control disabled btn btn-warning mt-2" type="submit">
+                        <i class="bi bi-plus-circle-dotted mx-2"></i>
+                        Create User
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
