@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
             for (let asset in balances) {
                 let listItem = document.createElement("li");
-                listItem.innerText = `${asset}: ${balances[asset]}`;
+                listItem.innerText = `${asset}: ${balances[asset].toLocaleString("en-US")}`;
                 balancesList.appendChild(listItem);
             }
         }
