@@ -1,0 +1,113 @@
+<!-- order_book.html -->
+<div class="container">
+    <!-- Symbol Selection -->
+    <div class="symbol-selector">
+        <select id="symbolSelect" onchange="window.location.href='?symbol='+this.value">
+            {% for s in symbols %}
+            <option value="{{ s }}" {% if s==symbol %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+        </select>
+        <div class="ltp-display">
+            LTP: ₹{{ "%.2f"|format(ltp) }}
+        </div>
+    </div>
+
+    <!-- Order Placement Form -->
+    <div class="order-form">
+        <form method="POST" action="{{ url_for('routes.place_order') }}">
+            <input type="hidden" name="symbol" value="{{ symbol }}">
+
+            <div class="form-group">
+                <label>Action:</label>
+                <select name="is_buy" required>
+                    <option value="true">Buy</option>
+                    <option value="false">Sell</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Price (₹):</label>
+                <input type="number" name="price" min="{{ " %.2f"|format(ltp * 0.98) }}" max="{{ " %.2f"|format(ltp *
+                    1.02) }}" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label>Quantity:</label>
+                <input type="number" name="quantity" min="1" required>
+            </div>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+
+    <!-- Order Book Tables -->
+    <div class="order-book">
+        <div class="buy-orders">
+            <h3>Buy Orders</h3>
+            <table>
+                <tr>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Orders</th>
+                </tr>
+                {% for o in buy_orders %}
+                <tr>
+                    <td>₹{{ "%.2f"|format(o.price) }}</td>
+                    <td>{{ o.total_quantity }}</td>
+                    <td>{{ o.order_count }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="sell-orders">
+            <h3>Sell Orders</h3>
+            <table>
+                <tr>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Orders</th>
+                </tr>
+                {% for o in sell_orders %}
+                <tr>
+                    <td>₹{{ "%.2f"|format(o.price) }}</td>
+                    <td>{{ o.total_quantity }}</td>
+                    <td>{{ o.order_count }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <!-- Holdings and Matched Orders -->
+    <div class="user-data">
+        <div class="holdings">
+            <h3>Your Holdings ({{ symbol }})</h3>
+            <p>Shares: {{ holdings.quantity if holdings else 0 }}</p>
+            <p>Collateral: ₹{{ "%.2f"|format(collateral) }}</p>
+        </div>
+
+        <div class="matched-orders">
+            <h3>Recent Trades</h3>
+            <table>
+                <tr>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Time</th>
+                </tr>
+                {% for mo in matched_orders %}
+                <tr>
+                    <td>₹{{ "%.2f"|format(mo.price) }}</td>
+                    <td>{{ mo.quantity }}</td>
+                    <td>{{ mo.timestamp.strftime('%H:%M:%S') }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Auto-refresh every 10 seconds
+    setTimeout(function () { location.reload(); }, 10000);
+</script>
