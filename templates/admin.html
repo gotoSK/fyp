@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock User Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 30px;
+            color: #333;
+        }
+
+        .user-details,
+        .collateral-details {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .user-details p,
+        .collateral-details p {
+            font-size: 16px;
+            margin: 8px 0;
+            color: #555;
+        }
+
+        /* .data-section {
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 10px;
+        } */
+
+        /* .data-section h2 {
+            color: #1976d2;
+            font-size: 22px;
+            margin-bottom: 15px;
+        } */
+
+        /* .data-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        } */
+        /* 
+        .data-list li {
+            background: #ffffff;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            border-left: 4px solid #1976d2;
+        } */
+    </style>
+    <script>
+        // Sample user and stock collateral data
+        const userData = {
+            name: 'userrname',
+            email: 'username@.com',
+            address: '123 Market St, Springfield, USA',
+            //     collateral: [
+            //         { Total: 'totsl limit', amount: 250, value: '$10,000' },
+            //         { Utilized: 'utilized limit', amount: 150, value: '$7,500' },
+            //         { available: 'available limit', amount: 400, value: '$15,000' }
+            //     ]
+        };
+
+        // Sample data (this can be fetched from an API)
+        const collateralData = [
+            { total: "NPR 1,000,000", utilized: "NPR 500,000", available: "NPR 500,000" }
+        ];
+
+        function populateTable() {
+            const tableBody = document.getElementById("collateral-table-body");
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            collateralData.forEach(item => {
+                const row = `<tr>
+                            <td>${item.total}</td>
+                            <td>${item.utilized}</td>
+                            <td>${item.available}</td>
+                        </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        // Call function on page load
+        window.onload = populateTable;
+
+
+
+        // Function to render user data dynamically
+        function renderDashboard() {
+            document.getElementById('user-name').textContent = userData.name;
+            document.getElementById('user-email').textContent = userData.email;
+            document.getElementById('user-address').textContent = userData.address;
+
+            //     const collateralList = document.getElementById('collateral-list');
+            //     collateralList.innerHTML = '';
+            //     userData.collateral.forEach(item => {
+
+            //         const li = document.createElement('li');
+            //         li.innerHTML = `<span>${item.available}</span> <span>Amount: ${item.amount}, Value: ${item.value}</span>`;
+            //         collateralList.appendChild(li);
+            //     });
+        }
+
+        window.onload = renderDashboard;
+    </script>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>User Stock Dashboard</h1>
+        </div>
+
+        <div class="user-details">
+            <p><strong>Name:</strong> <span id="user-name"></span></p>
+            <p><strong>Email:</strong> <span id="user-email"></span></p>
+            <p><strong>Address:</strong> <span id="user-address"></span></p>
+        </div>
+
+        <div class="collateral-details">
+            <h2>Collateral Details</h2>
+            <ul id="collateral-list" class="data-list"></ul>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Total Trading Limit</th>
+                        <th>Utilized Trading Limit</th>
+                        <th>Available Trading Limit</th>
+                    </tr>
+                </thead>
+                <tbody id="collateral-table-body"></tbody>
+            </table>
+            <input type="button" name="edit" value="Edit">
+        </div>
+
+    </div>
+</body>
+
+</html>
