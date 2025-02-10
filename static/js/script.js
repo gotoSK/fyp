@@ -1,8 +1,322 @@
+Anish
+anish0698
+Online
+
+iblamesugam — 8/30/2024 2:49 PM
+https://discord.gg/DFXErWw4
+iblamesugam — 12/17/2024 6:35 PM
+1)TCP Socket Programming:
+
+Create a Java client-server program using TCP sockets where the client sends a string, and the server responds with the reversed string.
+
+2)UDP Socket Programming:
+Expand
+LabQues.txt
+1 KB
+print("Enter your port: 1234\nEnter reciever's port: 5678\nYou: Hola!\nFriend: Can you speak english?\nYou:\n\n")
+print("Enter your port: 5678\nEnter reciever's port: 1234\nYou: \nFriend: Hola!\nYou: Can you speak english?\nFriend: \n")
+output_cheat.py
+1 KB
+package Lab.NetworkProgramming;
+
+import java.io.*;
+import java.net.*;
+
+public class Lab1Client {
+Expand
+Lab1Client.java
+1 KB
+package Lab.NetworkProgramming;
+
+/*
+* 1)TCP Socket Programming:
+*   Create a Java client-server program using TCP sockets where the client sends a string, and the server responds with the reversed string.
+* */
+Expand
+Lab1Server.java
+2 KB
+package Lab.NetworkProgramming;
+
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+Expand
+Lab2Client.java
+2 KB
+package Lab.NetworkProgramming;
+
+/*
+* 2)UDP Socket Programming:
+
+Write a UDP-based chat application where one instance acts as the sender and the other as the receiver.
+Expand
+Lab2Server.java
+2 KB
+package Lab.NetworkProgramming;
+
+/*
+* 3)Working with URLs:
+
+Develop a Java program that fetches the HTML content of a given URL and displays all the hyperlinks present on the webpage.
+Expand
+Lab3.java
+2 KB
+package Lab.NetworkProgramming;
+
+import javax.mail.*;
+import javax.mail.search.FlagTerm;
+import java.util.Properties;
+Expand
+Lab4ReceiveMail.java
+2 KB
+package Lab.NetworkProgramming;
+
+/*
+*4)Java Mail API, Sending and Receiving Email
+Sending Emails:
+Expand
+Lab4SendMail.java
+3 KB
+Anish — 2/7/2025 2:39 PM
+from flask import Flask, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from models import db, User
+app = Flask(name)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db.init_app(app)
+
+@app.route('/api/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    users_list = [
+        {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "phone_number": user.phone_number,
+            "collateral": user.collateral
+        }
+        for user in users
+    ]
+    return jsonify(users_list)
+
+if name == 'main':
+    app.run(debug=True)
+yo code hera ta
+iblamesugam — 2/7/2025 2:40 PM
+m tyo report milaudai xu, akai xin hai
+Anish — 2/7/2025 2:40 PM
+class User(db.Model, UserMixin):
+    tablename = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+    first_name = db.Column(db.String(80))
+    middle_name = db.Column(db.String(80))
+    last_name = db.Column(db.String(80))
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone_number = db.Column(db.String(20))
+    demat_id = db.Column(db.String(80), unique=True)
+    collateral = db.Column(db.Float, default=0.0)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+yesbata fetch garna lako
+iblamesugam — 2/7/2025 3:29 PM
+thik xa ta code ta. timle lekhya ho ki parag le? 
+problem chai k aayo dekhau ta
+Anish — 2/7/2025 3:34 PM
+mero ho
+mero ma structure na mile ho ki k ho
+time run gri hera ta
+iblamesugam — 2/7/2025 3:36 PM
+database file diyo paarg le?
+tyo chaiyo ni ta suru ma
+site.db vanne file hola
+models.py vanne ni hola, tes bata tanya xa values haru
+Anish — 2/7/2025 3:38 PM
+class User(db.Model, UserMixin):
+    tablename = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+    first_name = db.Column(db.String(80))
+    middle_name = db.Column(db.String(80))
+    last_name = db.Column(db.String(80))
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone_number = db.Column(db.String(20))
+    demat_id = db.Column(db.String(80), unique=True)
+    collateral = db.Column(db.Float, default=0.0)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+iblamesugam — 2/7/2025 3:38 PM
+maile ta arkai tarika le garya theya. simple thyo
+db file ni dyou ta
+Anish — 2/7/2025 3:43 PM
+messanger hera ta
+iblamesugam — 2/7/2025 3:49 PM
+site.db vanne file xa timi sita?
+Image
+Anish — 2/7/2025 3:50 PM
+nai model matra xa
+tyo ta teti ko lagi haina ra
+iblamesugam — 2/7/2025 3:51 PM
+ani data nai tes vitra hunxa .db vanne file vitra
+tyo naayesi read garnai milena ni data 
+Anish — 2/7/2025 3:52 PM
+parag le ta malie tyoo model matra deko xa
+ma ta tyoo model bata fetch garne matra banauna lako thyoo
+iblamesugam — 2/7/2025 3:54 PM
+model ta hamro python code matra vayo. tara data chaiyo ni read garna lai. tyo maga na database file
+Anish — 2/7/2025 3:54 PM
+aee lala
+Anish — 2/7/2025 9:24 PM
+oi diagram haru deu ta
+activity diagram
+iblamesugam — Today at 4:58 PM
+tyo hamro data set lai jupyter ma manipulate garera heri rakha na. voli sodyo vane defense ma feri asti ko jastai lyang hunxa
+Anish — Today at 4:58 PM
+ma herxu
+k k garne ho??
+iblamesugam — Today at 5:00 PM
+particular stock symbol lai matra display garau na
+stockSymbol vanne column bata
+Anish — Today at 5:09 PM
+oi tyo code deu na ma commit garxu
+iblamesugam — Today at 5:12 PM
+ruka na vaisakyo
+mildaudai xu kunai kunai error aako
+Anish — Today at 5:13 PM
+aee lala
+iblamesugam — Today at 5:55 PM
+static/css
+ vitra yo haldyou
+.user-area {
+    padding-left: 5vw;
+}
+
+/* Style for the user dropdown */
+.dropdown {
+Expand
+user.css
+3 KB
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+Expand
+login.css
+1 KB
+file name change nagara hai
+ani 
+statc/js
+ vitra yo thapdyou
+document.addEventListener("DOMContentLoaded", function() {
+
+    const dropbtn = document.querySelector(".dropbtn");
+    const dropdownContent = document.querySelector(".dropdown-content");
+
+    dropbtn.addEventListener("click", function(event) {
+Expand
+user.js
+1 KB
+Anish — Today at 5:56 PM
+python code pani deu na
+iblamesugam — Today at 5:56 PM
+suru ma yo hala na
+templates   vtira yo add gara 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+Expand
+login.html
+2 KB
+ati add garesi vana
+Anish — Today at 6:00 PM
+oi tyo sidai main branch ma commit garna milxa?
+ki arkai bata garru
+iblamesugam — Today at 6:01 PM
+main ma ho aba sidai
+voli defence xa main mai herxa tesle
+teti commit garera vana ma py code dinxu
+iblamesugam — Today at 6:21 PM
+xito gara na parag le herxa
+Anish — Today at 6:21 PM
+vaisakyo ta
+iblamesugam — Today at 6:23 PM
+yo chai bahira folder mai
+from utils import assets
+import time
+
+print("Loading Users ...")
+
+class User:
+Expand
+user.py
+2 KB
+Anish — Today at 6:28 PM
+aru ni xa ra
+iblamesugam — Today at 6:34 PM
+JS halxou? auta xa script.js lai update gareko xu
+Anish — Today at 6:51 PM
+ah deu
+iblamesugam — Today at 6:52 PM
+terminal batai commit garxou ki github ko website bata?
+Anish — Today at 6:52 PM
+bash bata gareko ho maile
+iblamesugam — Today at 6:53 PM
+https://github.com/gotoSK/fyp/blob/main/static/js/script.js
+GitHub
+fyp/static/js/script.js at main · gotoSK/fyp
+Order Matching & Clearing Obligations. Contribute to gotoSK/fyp development by creating an account on GitHub.
+yo link khola ta
+Anish — Today at 6:54 PM
+tei halnu ho
+iblamesugam — Today at 6:54 PM
+Image
+tyo edit garne ma click gara ta
+ani tya vako code ctrl+A garera metaidyou sab
+garyou?
+Anish — Today at 6:55 PM
+garyo
+iblamesugam — Today at 6:56 PM
 document.addEventListener('DOMContentLoaded', function() {
     
     var socket = io();
     
     // Store the last known values
+    var uname = sessionStorage.getItem('uname') ? sessionStorage.getItem('uname') : null;
+Expand
+message.txt
+29 KB
+ani yo paste gardyou
+﻿
+iblamesugam
+iblamesugam
+ 
+document.addEventListener('DOMContentLoaded', function() {
+    
+    var socket = io();
+    
+    // Store the last known values
+    var uname = sessionStorage.getItem('uname') ? sessionStorage.getItem('uname') : null;
+    let balances = sessionStorage.getItem('balances') ? JSON.parse(sessionStorage.getItem('balances')) || {} : {}; // {'asset1':xxx, 'asset2':xxx, ...}
+    let collateral = sessionStorage.getItem('collateral') ? parseFloat(sessionStorage.getItem('collateral')) : 0.0;  // symbol that is being displayed
+
     var dataMat = sessionStorage.getItem('dataMat') ? JSON.parse(sessionStorage.getItem('dataMat')) || [] : [];  // [LTP, Symbol, Name, PrevClose, [chart plots]] for each stock
 
     var symbol = sessionStorage.getItem('symbol') ? sessionStorage.getItem('symbol') : null;  // symbol that is being displayed
@@ -18,6 +332,48 @@ document.addEventListener('DOMContentLoaded', function() {
     var labels = sessionStorage.getItem('labels') ? JSON.parse(sessionStorage.getItem('labels')) || [] : [];  // For x-axis labels (timestamps)
     
     var ctx = document.getElementById('priceChart').getContext('2d');  // Get the canvas context for drawing the chart
+
+
+    // Listen for user_info event from Flask
+    socket.on("user_info", function (data) {
+        // Update username
+        if (data.uname) {
+            uname = data.uname;
+            sessionStorage.setItem('uname', uname);
+        }
+
+        // Update user's name
+        if (data.name) {
+            document.getElementById("user-name").innerText = `${data.name}`;
+        }
+        
+        // Update collateral display
+        if (data.collateral) {
+            collateral = data.collateral;
+            sessionStorage.setItem("collateral", collateral);
+            document.getElementById("collateral-display").innerText = `Collateral: NPR ${collateral.toFixed(2)}`;
+        }
+        
+        // Update balance list
+        if (data.balance) {
+            balances = data.balance;
+            sessionStorage.setItem('balances', JSON.stringify(balances));
+            let balancesList = document.getElementById("balances");
+            balancesList.innerHTML = ""; // Clear previous values
+    
+            for (let asset in balances) {
+                let listItem = document.createElement("li");
+                listItem.innerText = `${asset}: ${balances[asset]}`;
+                balancesList.appendChild(listItem);
+            }
+        }
+    });
+
+    // Collateral deduction request from server for market orders
+    socket.on("deduct_req", function (data) {
+        let amt = data.amt
+        socket.emit('deduct_buy', { amt });
+    });
 
 
     function load_exploreTab() {
@@ -214,7 +570,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Create a real-time line chart for LTP
+    // Create a real-time line chart
     var priceChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -268,7 +624,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         display: false,  // Hide gridlines for X-axis
                     },
                     ticks: {
-                        color: '#ccc'  // X-axis label color
+                        color: '#ccc',  // X-axis label color
+                        display: false
                     }
                 },
                 y: {
@@ -402,7 +759,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#filled-orders-table-body').empty();
 
         placedOrders.forEach(function(order) {
-            if (order[0] != null) {
+            if (order && order[7] == uname) {
                 var row = '<tr>' +
                     '<td>' + order[1] + '</td>' + // Symbol
                     '<td>' + order[2] + '</td>' + // Qty
@@ -414,14 +771,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (!order[6]) {
                     row += '<td><div class="loading-circle"></div></td>';
                 }
+                else{
+                    row += '<td>Yes</td>';
+                }
                 
+                row += '</tr>';
                 // If Rem. is greater than 0, it's an open order
                 if (order[4] > 0) {
-                    row += '<td><a href="#">Edit</a> <a href="#">Del</a></td>';
-                    row += '</tr>';
                     $('#open-orders-table-body').append(row);
                 } else {
-                    row += '</tr>';
                     $('#filled-orders-table-body').append(row);
                 }
             }
@@ -543,9 +901,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
         }
+
         if (qty < 10) {
             alert('Quantity must be of at least 10 units.');
             return;
+        }
+        
+        // Validating with user balance and collateral
+        if (action == 'Sell') { // Limit/Market sell
+            if (qty > balances[symbol]) {
+                alert(`Sell amount exceeds your balance! Your balance for ${symbol}: ${balances[symbol]}`);
+                return;
+            }
+        }
+        if (action == 'Buy') { // Limit Buy
+            if (rate != 0 && rate*qty > collateral) {
+                alert(`Buy amount exceeds your collateral! Your collateral: NPR ${collateral}`);
+                return;
+            }
+            else if (rate == 0) { // Market Buy
+                // set price as the lower circuit for conservative estimation of the market order's rate
+                let mktRate = dataMat.find(asset => asset[1] == symbol) [3] * 0.9 
+                if (mktRate * qty > collateral) {
+                    alert(`Buy amount exceeds your collateral! Your collateral: NPR ${collateral}`);
+                    return;
+                }
+            }
+        }
+
+        // Deducting collateral
+        if (action == 'Buy') {
+            let amt = qty * rate;
+            if (amt != 0) { // Limit order (for market orders deduction occurs when order is filled at market price)
+                collateral -= amt;
+                sessionStorage.setItem("collateral", collateral);
+                // Emit deduction event to Flask
+                socket.emit('deduct_buy', { amt });
+            }
+        }
+        // Deducting asset balance
+        if (action == 'Sell') {
+            balances[symbol] -= qty
+            sessionStorage.setItem('balances', JSON.stringify(balances));
+            socket.emit('deduct_sell', { qty });
         }
 
         // Submit form data via AJAX
@@ -611,6 +1009,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ensure the chart values are saved before the page is unloaded (for data integrity &/or backup for unexpected interruptions)
     window.addEventListener("beforeunload", function () {
+        sessionStorage.setItem('uname', uname);
+        sessionStorage.setItem('balances', JSON.stringify(balances));
+        sessionStorage.setItem("collateral", collateral);
         sessionStorage.setItem('dataMat', JSON.stringify(dataMat));
         sessionStorage.setItem('symbol', symbol);
         sessionStorage.setItem('lastSellOB', JSON.stringify(lastSellOB));
@@ -621,3 +1022,5 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('placedOrders', JSON.stringify(placedOrders));
     });
 });
+message.txt
+29 KB
