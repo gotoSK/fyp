@@ -1,39 +1,27 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Your Holdings</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Your Holdings</h1>
-    <table>
-        <tr>
-            <th>Symbol</th>
-            <th>Quantity</th>
-            <th>Current Value</th>
-        </tr>
-        {% for h in holdings %}
-        <tr>
-            <td>{{ h.symbol }}</td>
-            <td>{{ h.quantity }}</td>
-            <td>रु. {{ h.quantity * h.current_price }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-
-</html>
+    <head>
+        <title>Your Holdings</title>
+        <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+        </style>
+    </head>
+    <body>
+        <h1>Your Holdings</h1>
+        <table>
+            <tr>
+                <th>Symbol</th>
+                <th>Quantity</th>
+                <th>Current Value</th>
+            </tr>
+            {% for h in holdings %}
+            <tr>
+                <td>{{ h.symbol }}</td>
+                <td>{{ h.quantity }}</td>
+                <td>रु. {{ h.quantity * h.current_price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html> -->
