@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.collateral) {
             collateral = data.collateral;
             sessionStorage.setItem("collateral", collateral);
-            document.getElementById("collateral-display").innerText = `Collateral: NPR ${collateral.toFixed(2)}`;
+            document.getElementById("collateral-display").innerText = `Collateral: NPR ${collateral.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         }
         
         // Update balance list
